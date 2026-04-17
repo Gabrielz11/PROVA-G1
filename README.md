@@ -58,3 +58,10 @@ Caso queira gerar um novo certificado `keystore.p12`, o comando utilizado foi:
 ```bash
 keytool -genkeypair -alias leilao -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore keystore.p12 -validity 3650 -storepass 123456 -keypass 123456 -dname "CN=Leilao, OU=TI, O=Ulbra, L=Canoas, ST=RS, C=BR" -noprompt
 ```
+
+---
+
+## 👥 Autores
+- **Gabriel Aires** - [Gabrielz11](https://github.com/Gabrielz11)
+- **Riquelmmy Pedrosa** - [Riquelmmy](https://github.com/Riquelmmy)
+
