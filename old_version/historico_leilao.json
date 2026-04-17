@@ -2,3 +2,5 @@
 {"timestamp": "2026-04-17 19:55:32", "evento": "NOVO_LANCE", "usuario": "gabriel", "valor": 1500.0}
 {"timestamp": "2026-04-17 19:56:09", "evento": "NOVO_LANCE", "usuario": "admin", "valor": 1800.0}
 {"timestamp": "2026-04-17 19:56:21", "evento": "NOVO_LANCE", "usuario": "gabriel", "valor": 1850.0}
+{"timestamp": "2026-04-17 20:22:23", "evento": "INICIO_LEILAO", "usuario": "SISTEMA", "valor": 1000.0}
+{"timestamp": "2026-04-17 20:22:45", "evento": "NOVO_LANCE", "usuario": "gabriel", "valor": 1500.0}

@@ -10,9 +10,11 @@ Trabalho prático desenvolvido para a disciplina de **Sistemas Paralelos e Distr
 - **Persistência:** Registro histórico completo de todas as atividades em arquivo de log.
 
 ## 🔒 Nota sobre Segurança e Boas Práticas
-> [!IMPORTANT]
-> Este repositório contém o arquivo `keystore.p12` (chave privada/certificado). **Subir arquivos de chaves para o GitHub não é uma boa prática de segurança em ambiente profissional.** 
-> No entanto, este arquivo foi incluído propositalmente para fins acadêmicos e de avaliação (Prova G1), visando facilitar a execução imediata e a demonstração do conhecimento sobre comunicações criptografadas em Java.
+> Este repositório utiliza o modelo de **Segurança Assimétrica**:
+> - **Servidor:** Utiliza o arquivo `keystore.p12` (contém a **Chave Privada**).
+> - **Clientes:** Utilizam o arquivo `truststore.p12` (contém apenas o **Certificado Público**).
+>
+> Embora subir chaves para o GitHub não seja o padrão profissional, aqui os arquivos estão separados corretamente para demonstrar o conhecimento de Infraestrutura de Chaves Públicas (PKI).
 
 ---
 
@@ -20,7 +22,8 @@ Trabalho prático desenvolvido para a disciplina de **Sistemas Paralelos e Distr
 
 ### 1. Pré-requisitos
 - Ter o Java JDK instalado (versão 8 ou superior).
-- O arquivo `keystore.p12` deve estar na mesma pasta dos arquivos `.java`.
+- O arquivo `keystore.p12` deve estar na pasta do **Servidor**.
+- O arquivo `truststore.p12` deve estar na pasta do **Cliente**.
 
 ### 2. Compilação
 Abra o terminal na pasta do projeto e execute:

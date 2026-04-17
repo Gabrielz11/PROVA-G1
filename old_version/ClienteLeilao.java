@@ -7,7 +7,7 @@ public class ClienteLeilao {
     private static final int SERVER_PORT = 12345;
 
     public static void main(String[] args) {
-        System.setProperty("javax.net.ssl.trustStore", "keystore.p12");
+        System.setProperty("javax.net.ssl.trustStore", "truststore.p12");
         System.setProperty("javax.net.ssl.trustStorePassword", "123456");
         System.setProperty("javax.net.ssl.trustStoreType", "PKCS12");
 
