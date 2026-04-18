@@ -32,7 +32,7 @@ public class ClientHandler implements Runnable {
             }
 
             enviarMensagem(Protocolo.BEM_VINDO + server.getState().getItemLeilao());
-            enviarMensagem(Protocolo.STATUS + server.getState().getMaiorLance() + ":" + server.getState().getVencedorAtual());
+            enviarMensagem(Protocolo.STATUS + server.getState().getMaiorLance() + ":" + server.getState().getVencedorAtual() + ":" + server.getState().getItemLeilao());
 
             String input;
             while ((input = in.readLine()) != null) {
@@ -68,6 +68,7 @@ public class ClientHandler implements Runnable {
         try {
             double v = Double.parseDouble(valorStr);
             if (server.getState().processarLance(v, usuario)) {
+                System.out.println("[LANCE] " + usuario + " ofertou R$ " + v);
                 server.broadcast(Protocolo.NOVO_LANCE + usuario + ":" + v);
                 server.getLogService().registrar("LANCE", usuario, v);
             } else {

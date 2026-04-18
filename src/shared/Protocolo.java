@@ -18,4 +18,5 @@ public class Protocolo {
     public static final String NOVO_LANCE = "NOVO_LANCE:";
     public static final String ERRO = "ERRO:";
     public static final String BEM_VINDO = "BEM_VINDO:";
+    public static final String FIM_LEILAO = "FIM_LEILAO:";
 }

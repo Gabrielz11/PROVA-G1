@@ -14,19 +14,28 @@ public class ServerListener implements Runnable {
             while ((msg = in.readLine()) != null) {
                 if (msg.startsWith(Protocolo.NOVO_LANCE)) {
                     String[] p = msg.split(":");
-                    System.out.println("\n[MURAL] " + p[1] + " lance: R$ " + p[2]);
+                    System.out.println("\n[MURAL] " + p[1] + " deu um lance de: R$ " + p[2]);
                 } else if (msg.startsWith(Protocolo.STATUS)) {
                     String[] p = msg.split(":");
-                    System.out.println("Status: R$ " + p[1] + " (" + p[2] + ")");
+                    System.out.println("Item: " + (p.length > 3 ? p[3] : "Leilão") + " | Lance Atual: R$ " + p[1] + " (" + p[2] + ")");
+                } else if (msg.startsWith(Protocolo.FIM_LEILAO)) {
+                    String[] p = msg.split(":");
+                    System.out.println("\n***********************************");
+                    System.out.println("      LEILÃO ENCERRADO!");
+                    System.out.println("VENCEDOR: " + p[1]);
+                    System.out.println("VALOR PAGO: R$ " + p[2]);
+                    System.out.println("***********************************");
+                    System.out.println("Pressione qualquer tecla para sair...");
+                    break;
                 } else if (msg.startsWith(Protocolo.ERRO)) {
                     System.out.println("\n[!] " + msg.substring(Protocolo.ERRO.length()));
                 } else {
                     System.out.println("\n[SISTEMA] " + msg);
                 }
-                System.out.print("Lance: ");
+                System.out.print("Seu Lance: ");
             }
         } catch (IOException e) {
-            System.out.println("Fim da conexão.");
+            System.out.println("\nConexão com o servidor encerrada.");
         }
     }
 }

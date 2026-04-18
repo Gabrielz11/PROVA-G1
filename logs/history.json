@@ -1,4 +1,8 @@
-{"timestamp": "2026-04-17 20:35:53", "evento": "BEM_VINDO:", "usuario": "SISTEMA", "valor": 1000.0}
-{"timestamp": "2026-04-17 20:36:57", "evento": "BEM_VINDO:", "usuario": "SISTEMA", "valor": 1000.0}
-{"timestamp": "2026-04-17 20:40:37", "evento": "BEM_VINDO:", "usuario": "SISTEMA", "valor": 1000.0}
-{"timestamp": "2026-04-17 20:41:53", "evento": "LANCE", "usuario": "gabriel", "valor": 1500.0}
+{"timestamp": "2026-04-17 21:28:28", "evento": "BEM_VINDO:", "usuario": "SISTEMA", "valor": 1000.0}
+{"timestamp": "2026-04-17 21:29:04", "evento": "LANCE", "usuario": "gabriel", "valor": 1400.0}
+{"timestamp": "2026-04-17 21:30:18", "evento": "BEM_VINDO:", "usuario": "SISTEMA", "valor": 1000.0}
+{"timestamp": "2026-04-17 21:30:36", "evento": "LANCE", "usuario": "gabriel", "valor": 1400.0}
+{"timestamp": "2026-04-17 21:30:53", "evento": "LANCE", "usuario": "admin", "valor": 1500.0}
+{"timestamp": "2026-04-17 21:31:05", "evento": "LANCE", "usuario": "admin", "valor": 1600.0}
+{"timestamp": "2026-04-17 21:31:05", "evento": "LANCE", "usuario": "gabriel", "valor": 1700.0}
+{"timestamp": "2026-04-17 21:31:25", "evento": "LANCE", "usuario": "gabriel", "valor": 1701.0}

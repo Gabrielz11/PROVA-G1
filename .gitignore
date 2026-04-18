@@ -1,3 +1,23 @@
+# Compiled Java classes
+*.class
 
-# Documentação Interna (Opcional)
-documentacao.md
+# Root packages from compilation
+/server/
+/client/
+/shared/
+/security/
+/persistence/
+
+# Logs and transient data
+/logs/
+/historico_leilao.txt
+
+# IDE Settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Project specific
+/bin/
+mapeamento_requisitos.md

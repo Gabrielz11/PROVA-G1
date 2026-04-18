@@ -1,70 +1,73 @@
-# 🔨 Sistema de Leilão Eletrônico Distribuído
+# 🔨 Sistema de Leilão Eletrônico Distribuído (Prova G1)
 
-Trabalho prático desenvolvido para a disciplina de **Sistemas Paralelos e Distribuídos** (Prova G1). O sistema consiste em uma plataforma de leilões eletrônicos onde múltiplos servidores (clientes) coordenam o processo de licitação em tempo real.
+Plataforma distribuída de leilões eletrônicos desenvolvida para a disciplina de **Sistemas Paralelos e Distribuídos**. O sistema permite que múltiplos compradores participem de um leilão em tempo real com coordenação centralizada e comunicação segura.
 
-## 🚀 Funcionalidades
-- **Comunicação Segura:** Implementação de Sockets TCP com camada de criptografia **SSL/TLS**.
-- **Multithreading:** Gerenciamento de múltiplas conexões simultâneas via Thread Pool no servidor e monitoramento em tempo real no cliente.
-- **Autenticação:** Sistema de login (Usuário/Senha) para participação no leilão.
-- **Lances em Tempo Real:** Validação de lances e notificação instantânea (broadcast) para todos os participantes conectados.
-- **Persistência:** Registro histórico completo de todas as atividades em arquivo de log.
+## 🚀 Requisitos Atendidos
 
-## 🔒 Nota sobre Segurança e Boas Práticas
-> Este repositório utiliza o modelo de **Segurança Assimétrica**:
-> - **Servidor:** Utiliza o arquivo `keystore.p12` (contém a **Chave Privada**).
-> - **Clientes:** Utilizam o arquivo `truststore.p12` (contém apenas o **Certificado Público**).
->
-> Embora subir chaves para o GitHub não seja o padrão profissional, aqui os arquivos estão separados corretamente para demonstrar o conhecimento de Infraestrutura de Chaves Públicas (PKI).
+### 🔧 Técnicos
+- **Comunicação:** Sockets TCP com suporte a broadcast.
+- **Concorrência:** Gerenciamento de múltiplas conexões via **Multithreading** (Thread Pool).
+- **Segurança (Bônus):** Criptografia total via **SSL/TLS** e sistema de **Autenticação**.
+- **Persistência:** Histórico completo salvo em `logs/history.json`.
+
+### 📱 Funcionalidades
+- **Cadastro Dinâmico:** O servidor permite configurar o item e o preço base no momento da inicialização.
+- **Validação de Lances:** Somente lances maiores que o atual são aceitos.
+- **Monitoramento Real-time:** Todos os participantes recebem notificações instantâneas de novos lances e status do leilão.
+- **Encerramento Controlado:** Comando administrativo para finalizar o leilão e declarar o vencedor.
 
 ---
 
 ## 🛠️ Como Executar
 
 ### 1. Pré-requisitos
-- Ter o Java JDK instalado (versão 8 ou superior).
-- O arquivo `keystore.p12` deve estar na pasta do **Servidor**.
-- O arquivo `truststore.p12` deve estar na pasta do **Cliente**.
+- Java JDK 8 ou superior instalado.
+- Certificados `keystore.p12` e `truststore.p12` na pasta `resources/`.
 
 ### 2. Compilação
-Abra o terminal na pasta do projeto e execute:
+Abra o terminal na raiz do projeto e execute:
 ```bash
-javac ServidorLeilao.java ClienteLeilao.java
+javac -d . src/shared/*.java src/security/*.java src/server/*.java src/server/persistence/*.java src/client/*.java
 ```
 
 ### 3. Execução do Servidor
-Inicie o servidor primeiro para que ele aguarde conexões:
 ```bash
-java ServidorLeilao
+java server.AuctionServer
 ```
+1. No início, digite o **Nome do Item** (ex: Notebook).
+2. Digite o **Preço Inicial** (ex: 1000).
+3. O servidor passará a aguardar conexões.
+4. Digite `fim` no console do servidor para encerrar o leilão a qualquer momento.
 
 ### 4. Execução do Cliente
-Abra novos terminais para cada comprador e execute:
+Abra novos terminais e execute:
 ```bash
-java ClienteLeilao
+java client.AuctionClient
 ```
+- **Login:** Use `gabriel` | `123` ou `admin` | `admin`.
+- **Lances:** Digite apenas o valor numérico e aperte Enter.
 
 ---
 
-## 🔑 Dados para Teste (Autenticação)
-Você pode utilizar as seguintes credenciais pré-cadastradas no código:
-- **Usuário:** `gabriel` | **Senha:** `123`
-- **Usuário:** `admin` | **Senha:** `admin`
-- **Usuário:** `comprador1` | **Senha:** `senha123`
-
-## 📜 Histórico e Logs
-Os logs de todos os lances aceitos e conexões são salvos no arquivo `historico_leilao.txt` na raiz do diretório.
+## 🔒 Dados de Teste
+| Usuário | Senha |
+| :--- | :--- |
+| `gabriel` | `123` |
+| `admin` | `admin` |
+| `comprador1` | `senha123` |
 
 ---
 
-## 🛠️ Referência: Gerando um novo Certificado
-Caso queira gerar um novo certificado `keystore.p12`, o comando utilizado foi:
-```bash
-keytool -genkeypair -alias leilao -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore keystore.p12 -validity 3650 -storepass 123456 -keypass 123456 -dname "CN=Leilao, OU=TI, O=Ulbra, L=Canoas, ST=RS, C=BR" -noprompt
-```
+## 📂 Estrutura do Projeto
+- `src/server/`: Lógica central, estado do leilão e handlers de clientes.
+- `src/client/`: Interface do comprador e listener de notificações.
+- `src/shared/`: Protocolo de comunicação e constantes.
+- `src/security/`: Configurações de SSL e Autenticação.
+- `resources/`: Certificados de segurança.
+- `logs/`: Persistência histórica.
 
 ---
 
 ## 👥 Autores
 - **Gabriel Aires** - [Gabrielz11](https://github.com/Gabrielz11)
 - **Riquelmmy Pedrosa** - [Riquelmmy](https://github.com/Riquelmmy)
-
