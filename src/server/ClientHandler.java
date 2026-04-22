@@ -54,17 +54,30 @@ public class ClientHandler implements Runnable {
     }
 
     private boolean tentarAutenticar() throws IOException {
-        out.println(Protocolo.AUTH_REQ);
-        String resp = in.readLine();
-        if (resp == null) return false;
-        String[] creds = resp.split(":");
-        if (creds.length == 2 && SecurityHelper.autenticar(creds[0], creds[1])) {
-            this.usuario = creds[0];
-            out.println(Protocolo.AUTH_SUCCESS);
-            return true;
+        while (true) {
+            out.println(Protocolo.AUTH_REQ);
+            String resp = in.readLine();
+            if (resp == null) return false;
+
+            if (resp.startsWith(Protocolo.CADASTRO)) {
+                String[] creds = resp.substring(Protocolo.CADASTRO.length()).split(":");
+                if (creds.length == 2 && SecurityHelper.cadastrar(creds[0], creds[1])) {
+                    this.usuario = creds[0];
+                    out.println(Protocolo.AUTH_SUCCESS);
+                    return true;
+                }
+            } else {
+                // Suporta "AUTH:user:pass" ou apenas "user:pass"
+                String dados = resp.startsWith(Protocolo.LOGIN) ? resp.substring(Protocolo.LOGIN.length()) : resp;
+                String[] creds = dados.split(":");
+                if (creds.length == 2 && SecurityHelper.autenticar(creds[0], creds[1])) {
+                    this.usuario = creds[0];
+                    out.println(Protocolo.AUTH_SUCCESS);
+                    return true;
+                }
+            }
+            out.println(Protocolo.AUTH_FAIL);
         }
-        out.println(Protocolo.AUTH_FAIL);
-        return false;
     }
 
     private void processarLance(String valorStr) {

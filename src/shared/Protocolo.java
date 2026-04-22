@@ -9,6 +9,7 @@ public class Protocolo {
     public static final String LANCE = "LANCE:";
     public static final String SAIR = "SAIR";
     public static final String LOGIN = "AUTH:";
+    public static final String CADASTRO = "REG:";
 
     // Comandos do Servidor -> Cliente
     public static final String AUTH_REQ = "AUTH_REQ";

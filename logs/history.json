@@ -13,3 +13,15 @@
 {"timestamp": "2026-04-22 10:19:08", "evento": "LANCE", "usuario": "gabriel", "valor": 1200.0}
 {"timestamp": "2026-04-22 10:19:28", "evento": "LANCE", "usuario": "comprador1", "valor": 12300.0}
 {"timestamp": "2026-04-22 10:19:46", "evento": "FINALIZADO", "usuario": "comprador1", "valor": 12300.0}
+{"timestamp": "2026-04-22 10:38:10", "evento": "BEM_VINDO:", "usuario": "SISTEMA", "valor": 1000.0}
+{"timestamp": "2026-04-22 10:38:32", "evento": "LANCE", "usuario": "Jackeline", "valor": 1200.0}
+{"timestamp": "2026-04-22 10:39:11", "evento": "LANCE", "usuario": "gabriel", "valor": 1300.0}
+{"timestamp": "2026-04-22 10:39:14", "evento": "FINALIZADO", "usuario": "gabriel", "valor": 1300.0}
+{"timestamp": "2026-04-22 10:50:13", "evento": "BEM_VINDO:", "usuario": "SISTEMA", "valor": 1000.0}
+{"timestamp": "2026-04-22 10:58:36", "evento": "BEM_VINDO:", "usuario": "SISTEMA", "valor": 109.0}
+{"timestamp": "2026-04-22 11:07:07", "evento": "BEM_VINDO:", "usuario": "SISTEMA", "valor": 1000.0}
+{"timestamp": "2026-04-22 11:07:36", "evento": "LANCE", "usuario": "gabriel", "valor": 1500.0}
+{"timestamp": "2026-04-22 11:07:46", "evento": "LANCE", "usuario": "gabriel", "valor": 1600.0}
+{"timestamp": "2026-04-22 11:07:49", "evento": "LANCE", "usuario": "gabriel", "valor": 1800.0}
+{"timestamp": "2026-04-22 11:07:50", "evento": "LANCE", "usuario": "gabriel", "valor": 1900.0}
+{"timestamp": "2026-04-22 11:08:15", "evento": "FINALIZADO", "usuario": "gabriel", "valor": 1900.0}

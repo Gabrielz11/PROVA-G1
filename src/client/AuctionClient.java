@@ -33,12 +33,34 @@ public class AuctionClient {
     }
 
     private static boolean realizarLogin(BufferedReader in, PrintWriter out, Scanner sc) throws IOException {
-        if (Protocolo.AUTH_REQ.equals(in.readLine())) {
-            System.out.print("Usuário: "); String u = sc.nextLine();
-            System.out.print("Senha: "); String p = sc.nextLine();
-            out.println(u + ":" + p);
-            return Protocolo.AUTH_SUCCESS.equals(in.readLine());
+        while (true) {
+            String serverReq = in.readLine();
+            if (!Protocolo.AUTH_REQ.equals(serverReq)) return false;
+
+            System.out.println("\nEscolha uma opção:");
+            System.out.println("1 - Entrar (Login)");
+            System.out.println("2 - Criar Conta (Cadastro)");
+            System.out.print("> ");
+            String opcao = sc.nextLine();
+
+            System.out.print("Usuário: ");
+            String u = sc.nextLine();
+            System.out.print("Senha: ");
+            String p = sc.nextLine();
+
+            if (opcao.equals("2")) {
+                out.println(Protocolo.CADASTRO + u + ":" + p);
+            } else {
+                out.println(Protocolo.LOGIN + u + ":" + p);
+            }
+
+            String resultado = in.readLine();
+            if (Protocolo.AUTH_SUCCESS.equals(resultado)) {
+                System.out.println("[SISTEMA] Autenticado com sucesso!");
+                return true;
+            } else {
+                System.out.println("[ERRO] Falha na autenticação/cadastro. Tente novamente.");
+            }
         }
-        return false;
     }
 }
