@@ -31,6 +31,8 @@ public class ClientHandler implements Runnable {
                 return;
             }
 
+            System.out.println("\n[CONEXÃO] Cliente conectou: " + usuario + " (IP: " + socket.getInetAddress().getHostAddress() + ")");
+
             enviarMensagem(Protocolo.BEM_VINDO + server.getState().getItemLeilao());
             enviarMensagem(Protocolo.STATUS + server.getState().getMaiorLance() + ":" + server.getState().getVencedorAtual() + ":" + server.getState().getItemLeilao());
 
@@ -43,8 +45,9 @@ public class ClientHandler implements Runnable {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Usuário " + usuario + " saiu.");
+            // Conexão perdida ou fechada abruptamente
         } finally {
+            System.out.println("[CONEXÃO] Cliente desconectou: " + (usuario != null ? usuario : "Anônimo"));
             server.removerCliente(this);
             try { socket.close(); } catch (IOException e) {}
         }

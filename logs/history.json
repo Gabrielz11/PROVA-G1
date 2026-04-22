@@ -6,3 +6,10 @@
 {"timestamp": "2026-04-17 21:31:05", "evento": "LANCE", "usuario": "admin", "valor": 1600.0}
 {"timestamp": "2026-04-17 21:31:05", "evento": "LANCE", "usuario": "gabriel", "valor": 1700.0}
 {"timestamp": "2026-04-17 21:31:25", "evento": "LANCE", "usuario": "gabriel", "valor": 1701.0}
+{"timestamp": "2026-04-22 10:13:54", "evento": "BEM_VINDO:", "usuario": "SISTEMA", "valor": 1000.0}
+{"timestamp": "2026-04-22 10:15:35", "evento": "LANCE", "usuario": "gabriel", "valor": 1200.0}
+{"timestamp": "2026-04-22 10:16:54", "evento": "FINALIZADO", "usuario": "gabriel", "valor": 1200.0}
+{"timestamp": "2026-04-22 10:18:53", "evento": "BEM_VINDO:", "usuario": "SISTEMA", "valor": 1000.0}
+{"timestamp": "2026-04-22 10:19:08", "evento": "LANCE", "usuario": "gabriel", "valor": 1200.0}
+{"timestamp": "2026-04-22 10:19:28", "evento": "LANCE", "usuario": "comprador1", "valor": 12300.0}
+{"timestamp": "2026-04-22 10:19:46", "evento": "FINALIZADO", "usuario": "comprador1", "valor": 12300.0}
