@@ -111,6 +111,19 @@ PROVA G1 SPD/
 
 ---
 
+## 📚 Documentação do Projeto
+
+Acesse os arquivos abaixo para entender os detalhes técnicos e as decisões de arquitetura:
+
+- [**📄 Mapeamento de Requisitos**](./mapeamento_requisitos.md): Este arquivo descreve como cada requisito solicitado pelo professor foi implementado no código, citando os arquivos e as linhas exatas.
+- [**📄 Justificativa: Java vs Python**](./Python_x_Java.md): Este documento explica por que optamos por Java em vez de Python, abordando conceitos como Threads Reais do SO vs. GIL do Python.
+- [**📄 Enunciado da Prova**](./G1-SPD-2026-1.pdf): Arquivo PDF com as instruções originais da Prova G1.
+
+### ☕ Por que Java?
+A utilização do **Java** foi essencial para garantir o **paralelismo real**. Diferente do Python (que é limitado pelo Global Interpreter Lock - GIL), o Java permite o gerenciamento de múltiplas threads nativas do sistema operacional. Isso garante que cada comprador no leilão seja processado de forma independente e simultânea, sem gargalos de execução, atendendo plenamente aos objetivos da disciplina de Sistemas Paralelos e Distribuídos.
+
+---
+
 ## 🛠️ Funcionalidades
 
 - **Múltiplos clientes simultâneos** — cada conexão roda em sua própria thread
