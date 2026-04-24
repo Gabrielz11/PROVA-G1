@@ -1,7 +1,12 @@
 # Compiled Java classes
 *.class
 
-# Root packages from compilation
+# Build directories
+out/
+target/
+bin/
+
+# Root packages from compilation (legacy/compiled locations)
 /server/
 /client/
 /shared/
@@ -19,5 +24,4 @@
 *.swo
 
 # Project specific
-/bin/
 mapeamento_requisitos.md

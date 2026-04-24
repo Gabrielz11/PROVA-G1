@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class AuctionClient {
     public static void main(String[] args) {
         SecurityHelper.configurarSSLCliente();
-        try (SSLSocket socket = (SSLSocket) SSLSocketFactory.getDefault().createSocket("127.0.0.1", 12345)) {
+        try (SSLSocket socket = (SSLSocket) SSLSocketFactory.getDefault().createSocket("192.168.100.2", 12345)) {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             Scanner scanner = new Scanner(System.in);
@@ -24,7 +24,8 @@ public class AuctionClient {
                         out.println(Protocolo.SAIR);
                         break;
                     }
-                    if (!cmd.isEmpty()) out.println(Protocolo.LANCE + cmd);
+                    if (!cmd.isEmpty())
+                        out.println(Protocolo.LANCE + cmd);
                 }
             }
         } catch (Exception e) {
@@ -34,8 +35,10 @@ public class AuctionClient {
 
     private static boolean realizarLogin(BufferedReader in, PrintWriter out, Scanner sc) throws IOException {
         if (Protocolo.AUTH_REQ.equals(in.readLine())) {
-            System.out.print("Usuário: "); String u = sc.nextLine();
-            System.out.print("Senha: "); String p = sc.nextLine();
+            System.out.print("Usuário: ");
+            String u = sc.nextLine();
+            System.out.print("Senha: ");
+            String p = sc.nextLine();
             out.println(u + ":" + p);
             return Protocolo.AUTH_SUCCESS.equals(in.readLine());
         }
