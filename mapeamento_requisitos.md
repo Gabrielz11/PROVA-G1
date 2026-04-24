@@ -6,15 +6,16 @@ Este documento vincula as exigências do professor ao código implementado, faci
 
 ### 1. Requisitos Técnicos de Infraestrutura
 
-#### 📡 Comunicação via Sockets TCP/UDP
+#### 📡 Comunicação via Sockets TCP com SSL/TLS
 *   **Onde está:** `src/server/AuctionServer.java` e `src/client/AuctionClient.java`.
 *   **Código:**
     ```java
-    // Servidor utilizando SSL sobre TCP (AuctionServer.java:54)
-    try (SSLServerSocket serverSocket = (SSLServerSocket) SSLServerSocketFactory.getDefault().createServerSocket(PORT))
+    // Servidor utilizando SSL sobre TCP (AuctionServer.java:53)
+    try (SSLServerSocket serverSocket = (SSLServerSocket) SSLServerSocketFactory.getDefault()
+            .createServerSocket(PORT))
 
     // Cliente conectando ao servidor (AuctionClient.java:12)
-    try (SSLSocket socket = (SSLSocket) SSLSocketFactory.getDefault().createSocket("127.0.0.1", 12345))
+    try (SSLSocket socket = (SSLSocket) SSLSocketFactory.getDefault().createSocket("0.0.0.0", 12345))
     ```
 
 #### 🧵 Gerenciamento de Threads para Conexões Concorrentes
@@ -36,7 +37,7 @@ Este documento vincula as exigências do professor ao código implementado, faci
 *   **Onde está:** `src/server/AuctionServer.java`.
 *   **Código:**
     ```java
-    // Cadastro dinâmico via console (AuctionServer.java:28-34)
+    // Cadastro dinâmico via console (AuctionServer.java:28-33)
     System.out.print("Digite o nome do item para leilão: ");
     String item = sc.nextLine();
     System.out.print("Digite o preço inicial: ");
@@ -48,7 +49,7 @@ Este documento vincula as exigências do professor ao código implementado, faci
 *   **Onde está:** `src/server/ClientHandler.java`.
 *   **Código:**
     ```java
-    // Identifica o usuário e processa o valor (ClientHandler.java:83-95)
+    // Identifica o usuário e processa o valor (ClientHandler.java:83-89)
     private void processarLance(String valorStr) {
         double v = Double.parseDouble(valorStr);
         if (server.getState().processarLance(v, usuario)) { // "usuario" identifica o autor
@@ -69,12 +70,11 @@ Este documento vincula as exigências do professor ao código implementado, faci
 *   **Onde está:** `src/server/AuctionServer.java`.
 *   **Código:**
     ```java
-    // Comando administrativo para fechar o leilão (AuctionServer.java:72-84)
+    // Comando administrativo para fechar o leilão (AuctionServer.java:72-76)
     private void finalizar() {
         state.encerrarLeilao();
         String msg = Protocolo.FIM_LEILAO + state.getVencedorAtual() + ":" + state.getMaiorLance();
         broadcast(msg);
-        // ...
     }
     ```
 
@@ -82,10 +82,10 @@ Este documento vincula as exigências do professor ao código implementado, faci
 *   **Onde está:** `src/server/AuctionState.java`.
 *   **Código:**
     ```java
-    // Regra de negócio do lance (AuctionState.java:27)
+    // Regra de negócio do lance (AuctionState.java:27-29)
     if (valor > maiorLance && leilaoAtivo) {
         maiorLance = valor;
-        // ...
+        vencedorAtual = usuario;
     }
     ```
 
@@ -97,7 +97,7 @@ Este documento vincula as exigências do professor ao código implementado, faci
 *   **Onde está:** `src/client/AuctionClient.java` (Envio) e `src/client/ServerListener.java` (Painel).
 *   **Código:**
     ```java
-    // Envio de lance (AuctionClient.java:27)
+    // Envio de lance (AuctionClient.java:28)
     if (!cmd.isEmpty()) out.println(Protocolo.LANCE + cmd);
 
     // Painel de Monitoramento Real-time (ServerListener.java:14-34)
@@ -110,10 +110,12 @@ Este documento vincula as exigências do professor ao código implementado, faci
 *   **Onde está:** `src/client/AuctionClient.java` e `src/security/SecurityHelper.java`.
 *   **Código:**
     ```java
-    // Cliente envia requisição de cadastro (AuctionClient.java:52)
-    out.println(Protocolo.CADASTRO + u + ":" + p);
+    // Cliente escolhe opção de cadastro e envia (AuctionClient.java:54)
+    if (opcao.equals("2")) {
+        out.println(Protocolo.CADASTRO + u + ":" + p);
+    }
 
-    // Servidor valida e persiste o novo usuário (SecurityHelper.java:86-93)
+    // Servidor valida e persiste o novo usuário (SecurityHelper.java:86-92)
     public static synchronized boolean cadastrar(String usuario, String senha) {
         if (USUARIOS.containsKey(usuario)) return false;
         USUARIOS.put(usuario, senha);
@@ -126,7 +128,7 @@ Este documento vincula as exigências do professor ao código implementado, faci
 
 ### 4. Persistência e Segurança
 
-#### 💾 Registro Histórico (Arquivo)
+#### 💾 Registro Histórico (Formato JSON)
 *   **Onde está:** `src/server/persistence/LogService.java`.
 *   **Código:**
     ```java
@@ -136,7 +138,7 @@ Este documento vincula as exigências do professor ao código implementado, faci
     }
     ```
 
-#### 🔒 Segurança (Bônus: Autenticação e Criptografia)
+#### 🔒 Segurança (SSL/TLS e Autenticação)
 *   **Onde está:** `src/security/SecurityHelper.java`.
 *   **Código:**
     ```java
@@ -145,7 +147,7 @@ Este documento vincula as exigências do professor ao código implementado, faci
     System.setProperty("javax.net.ssl.keyStorePassword", "123456");
     System.setProperty("javax.net.ssl.keyStoreType", "PKCS12");
 
-    // Autenticação (SecurityHelper.java:82-84)
+    // Autenticação robusta (SecurityHelper.java:82-84)
     public static boolean autenticar(String usuario, String senha) {
         return USUARIOS.containsKey(usuario) && USUARIOS.get(usuario).equals(senha);
     }
