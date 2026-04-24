@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class AuctionClient {
     public static void main(String[] args) {
         SecurityHelper.configurarSSLCliente();
-        try (SSLSocket socket = (SSLSocket) SSLSocketFactory.getDefault().createSocket("192.168.100.2", 12345)) {
+        try (SSLSocket socket = (SSLSocket) SSLSocketFactory.getDefault().createSocket("0.0.0.0", 12345)) {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             Scanner scanner = new Scanner(System.in);
@@ -36,7 +36,8 @@ public class AuctionClient {
     private static boolean realizarLogin(BufferedReader in, PrintWriter out, Scanner sc) throws IOException {
         while (true) {
             String serverReq = in.readLine();
-            if (serverReq == null || !serverReq.equals(Protocolo.AUTH_REQ)) return false;
+            if (serverReq == null || !serverReq.equals(Protocolo.AUTH_REQ))
+                return false;
 
             System.out.println("\n--- AUTENTICAÇÃO ---");
             System.out.println("1 - Entrar (Login)");

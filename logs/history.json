@@ -28,3 +28,7 @@
 {"timestamp": "2026-04-22 11:15:17", "evento": "BEM_VINDO:", "usuario": "SISTEMA", "valor": 1200.0}
 {"timestamp": "2026-04-22 11:15:33", "evento": "LANCE", "usuario": "gabriel", "valor": 1300.0}
 {"timestamp": "2026-04-22 11:15:36", "evento": "FINALIZADO", "usuario": "gabriel", "valor": 1300.0}
+{"timestamp": "2026-04-24 18:31:38", "evento": "BEM_VINDO:", "usuario": "SISTEMA", "valor": 1200.0}
+{"timestamp": "2026-04-24 18:32:59", "evento": "BEM_VINDO:", "usuario": "SISTEMA", "valor": 1200.0}
+{"timestamp": "2026-04-24 18:33:22", "evento": "LANCE", "usuario": "gabrielaires", "valor": 1205.0}
+{"timestamp": "2026-04-24 18:33:29", "evento": "FINALIZADO", "usuario": "gabrielaires", "valor": 1205.0}
