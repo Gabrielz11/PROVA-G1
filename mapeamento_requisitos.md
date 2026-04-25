@@ -7,6 +7,7 @@ Este documento vincula as exigências do professor ao código implementado, faci
 ### 1. Requisitos Técnicos de Infraestrutura
 
 #### 📡 Comunicação via Sockets TCP com SSL/TLS
+**Descrição:** Utiliza o protocolo TCP para garantir a entrega confiável e ordenada de pacotes entre o servidor e os clientes, reforçado pela camada de segurança SSL/TLS, que criptografa os dados em trânsito para evitar interceptações.
 *   **Onde está:** `src/server/AuctionServer.java` e `src/client/AuctionClient.java`.
 *   **Código:**
     ```java
@@ -19,6 +20,7 @@ Este documento vincula as exigências do professor ao código implementado, faci
     ```
 
 #### 🧵 Gerenciamento de Threads para Conexões Concorrentes
+**Descrição:** Implementa um modelo de concorrência onde cada novo cliente é isolado em sua própria linha de execução (Thread). Isso permite que o servidor processe múltiplos lances e interações simultaneamente sem travamentos.
 *   **Onde está:** `src/server/AuctionServer.java`.
 *   **Código:**
     ```java
@@ -34,6 +36,7 @@ Este documento vincula as exigências do professor ao código implementado, faci
 ### 2. Funcionalidades do Servidor
 
 #### a) Cadastrar Item de Leilão
+**Descrição:** Procedimento administrativo realizado na inicialização do servidor para definir o nome do item e o preço base, preparando o estado global do leilão para os participantes.
 *   **Onde está:** `src/server/AuctionServer.java`.
 *   **Código:**
     ```java
@@ -46,6 +49,7 @@ Este documento vincula as exigências do professor ao código implementado, faci
     ```
 
 #### b) Receber e Armazenar os Lances (Identificando o Autor)
+**Descrição:** Mecanismo que captura as ofertas enviadas pelos clientes, vinculando o valor do lance ao nome de usuário autenticado para garantir a transparência de quem deu a maior oferta.
 *   **Onde está:** `src/server/ClientHandler.java`.
 *   **Código:**
     ```java
@@ -59,6 +63,7 @@ Este documento vincula as exigências do professor ao código implementado, faci
     ```
 
 #### i. Informar aos compradores o lance atual (Quem enviou e o Valor)
+**Descrição:** Sistema de broadcast que notifica todos os usuários conectados sempre que um lance é validado, permitindo que os participantes acompanhem a disputa em tempo real.
 *   **Onde está:** `src/server/ClientHandler.java`.
 *   **Código:**
     ```java
@@ -67,6 +72,7 @@ Este documento vincula as exigências do professor ao código implementado, faci
     ```
 
 #### c) Encerrar o Leilão do Item
+**Descrição:** Finalização controlada do leilão, onde o servidor deixa de aceitar novos lances, determina o vencedor e comunica o resultado final para todos os participantes.
 *   **Onde está:** `src/server/AuctionServer.java`.
 *   **Código:**
     ```java
@@ -79,6 +85,7 @@ Este documento vincula as exigências do professor ao código implementado, faci
     ```
 
 #### ✅ Validar Lances (Deve ser maior que o anterior)
+**Descrição:** Lógica de negócio que assegura a integridade do leilão, aceitando apenas propostas que superem o valor atual e rejeitando qualquer oferta menor ou igual ao último lance registrado.
 *   **Onde está:** `src/server/AuctionState.java`.
 *   **Código:**
     ```java
@@ -94,6 +101,7 @@ Este documento vincula as exigências do professor ao código implementado, faci
 ### 3. Funcionalidades dos Clientes
 
 #### 💻 Interface para enviar lances e Painel em Tempo Real
+**Descrição:** Interface de linha de comando no cliente que permite o envio de lances e a escuta contínua de eventos, atualizando o console do usuário com as novidades do leilão instantaneamente.
 *   **Onde está:** `src/client/AuctionClient.java` (Envio) e `src/client/ServerListener.java` (Painel).
 *   **Código:**
     ```java
@@ -107,6 +115,7 @@ Este documento vincula as exigências do professor ao código implementado, faci
     ```
 
 #### 👤 Cadastro Dinâmico de Usuários
+**Descrição:** Permite que novos participantes registrem suas credenciais durante a execução do sistema, armazenando-as de forma persistente para que possam participar de leilões futuros.
 *   **Onde está:** `src/client/AuctionClient.java` e `src/security/SecurityHelper.java`.
 *   **Código:**
     ```java
@@ -129,6 +138,7 @@ Este documento vincula as exigências do professor ao código implementado, faci
 ### 4. Persistência e Segurança
 
 #### 💾 Registro Histórico (Formato JSON)
+**Descrição:** Sistema de logs persistentes que grava todos os eventos críticos do leilão em arquivos estruturados (JSON), servindo como base de auditoria para verificar lances e resultados.
 *   **Onde está:** `src/server/persistence/LogService.java`.
 *   **Código:**
     ```java
@@ -139,6 +149,7 @@ Este documento vincula as exigências do professor ao código implementado, faci
     ```
 
 #### 🔒 Segurança (SSL/TLS e Autenticação)
+**Descrição:** Combinação de criptografia de ponta a ponta (SSL) para proteger os dados e um sistema de autenticação via login e senha para validar a identidade de cada participante.
 *   **Onde está:** `src/security/SecurityHelper.java`.
 *   **Código:**
     ```java
